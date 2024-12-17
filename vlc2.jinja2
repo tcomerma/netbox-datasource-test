@@ -19,10 +19,8 @@ xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/">
   {% if ip.cf.playlistVLC is not none %}
     {% set g = groups[ ip.cf.playlistVLC ] if ip.cf.playlistVLC in groups else "" %}
     {% set g = g + "<vlc:item tid=" + count.value|string + "/>"  %}
-{% do groups.update({ip.cf.playlistVLC: g}) %}
-
+    {% do groups.update({ip.cf.playlistVLC: g}) %}
     {% set count.value = count.value + 1 %}
-{{ groups }}
   {% endif %}
 {% endfor %}
    </trackList>
