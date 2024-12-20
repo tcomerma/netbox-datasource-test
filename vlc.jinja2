@@ -18,7 +18,7 @@ xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/">
 {%- set items = [] %}
 {%- for ip in queryset %}
       <track>
-           <location>udp://@{{ ip.address }}:5000</location>
+           <location>udp://@{{ ip.address.ip }}:5000</location>
            <album>{{ ns.count }}</album>
            <title>{{ ip.description }}</title>
            <annotation>{{ ip.description }}</annotation>
@@ -35,25 +35,23 @@ xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/">
    <extension application="http://www.videolan.org/vlc/playlist/0">
 {%- set ns.curr = [] %}
 {%- for i in items|sort(attribute='folder,index') %}
-
 {%-   set folder = i['folder'].split('/') %}
 {%-   set ns.index = i['index'] %}
 {%-   for j in folder %}
-
 {#-
-folder (llista amb nuvells de la carpeta): {{ folder }}
-ns.level (nivell de la carpeta en curs): {{ ns.level }}
-ns.curr (llista de nivells de carpeta de l'element anterior): {{ ns.curr }}
-longitud de ns.curr: {{ ns.curr|length }}
-ns.curr[ns.level] (element actaul de ns.curr): {{ ns.curr[ns.level] }}
-j (ndex del element de folder en curs): {{ j }}
+- folder (llista amb nivells de la carpeta): {{ folder }}
+- ns.level (nivell de la carpeta en curs): {{ ns.level }}
+- ns.curr (llista de nivells de carpeta de l'element anterior): {{ ns.curr }}
+- longitud de ns.curr: {{ ns.curr|length }}
+- ns.curr[ns.level] (element actaul de ns.curr): {{ ns.curr[ns.level] }}
+- j (index del element de folder en curs): {{ j }}
 #}
 {%-     if ns.curr|length <= ns.level %}
       <vlc:node title="{{ j }}">
 {%-     set dummy = ns.curr.append(j) %}
 {%-     elif ns.curr[ns.level] == j %}
 {%-     else %}
-{%-        for n in range(ns.index - ns.curr|length) %}
+{%-        for n in range(ns.curr|length - ns.level) %}
 {%-          set dummy = ns.curr.pop() %}
        </vlc:node>
 {%-        endfor %}
@@ -65,7 +63,7 @@ j (ndex del element de folder en curs): {{ j }}
                <vlc:item tid="{{ ns.index }}" />
 {%-   set ns.level = 0 %}
 {%- endfor %}
-{%- for n in range(ns.index - ns.curr|length ) %}
+{%- for n in range(ns.curr|length - ns.level ) %}
        </vlc:node>
 {%-   endfor %}
    </extension>
