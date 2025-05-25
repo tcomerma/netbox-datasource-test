@@ -17,8 +17,8 @@ Pendent:
 {% set ns = namespace(count=0, level=0, curr=[], index="") -%}
 id;site;name;status;location;facility_id;tenant;role;rack_type;form_factor;serial;asset_tag;width;u_height;desc_units;outer_width;outer_height;outer_depth;outer_unit;mounting_depth;airflow;weight;max_weight;weight_unit;description;comments;tags
 {% for rack in queryset -%}
-{{ rack.id }};{{ rack.site or '' }};{{ rack.name or '' }};{{ rack.status or '' }};{{ rack.location or '' }};{{ rack.facility_id or '' }};{{ rack.tenant or '' }};{{ rack.role or '' }};{{ rack.rack_type or '' }};{{ rack.form_factor or '' }};{{ rack.serial or '' }};{{ rack.asset_tag or '' }};{{ rack.width or '' }};{{ rack.u_height or '' }};{{ rack.desc_units or '' }};{{ rack.outer_width or '' }};{{ rack.outer_height or '' }};{{ rack.outer_depth or '' }};{{ rack.outer_unit or '' }};{{ rack.mounting_depth or '' }};{{ rack.airflow or '' }};{{ rack.weight or '' }};{{ rack.max_weight or '' }};{{ rack.weight_unit or '' }};{{ rack.description or '' }};"{{ rack.comments or '' }}";
+{{ rack.id }};{{ rack.site or '' }};{{ rack.name or '' }};{{ rack.status or '' }};{{ rack.location or '' }};{{ rack.facility_id or '' }};{{ rack.tenant or '' }};{{ rack.role or '' }};{{ rack.rack_type or '' }};{{ rack.form_factor or '' }};{{ rack.serial or '' }};{{ rack.asset_tag or '' }};{{ rack.width or '' }};{{ rack.u_height or '' }};{{ rack.desc_units or '' }};{{ rack.outer_width or '' }};{{ rack.outer_height or '' }};{{ rack.outer_depth or '' }};{{ rack.outer_unit or '' }};{{ rack.mounting_depth or '' }};{{ rack.airflow or '' }};{{ rack.weight or '' }};{{ rack.max_weight or '' }};{{ rack.weight_unit or '' }};{{ rack.description or '' }};"{{ rack.comments or '' }}";"
    {%- for tag in rack.tags.slugs() -%}
 {{ tag }}{%- if not loop.last -%},{%- endif -%}
-   {%- endfor %}
+   {%- endfor -%}"
 {% endfor -%}
