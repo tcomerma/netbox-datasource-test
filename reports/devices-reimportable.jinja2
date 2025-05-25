@@ -15,9 +15,9 @@ Pendent:
 
 -#}
 {% set ns = namespace(count=0, level=0, curr=[], index="") -%}
-id;role;manufacturer;device_type;status;site;name;tenant;platforma;serial;asset_tag;location;rack;position;face;latitude;longitude;parent;device_bay;airflow;virtual_chassis;vc_position;vc_priority;cluster;description;config_template;comments;tags
+id;role;manufacturer;device_type;status;site;name;tenant;platform;serial;asset_tag;location;rack;position;face;latitude;longitude;parent;device_bay;airflow;virtual_chassis;vc_position;vc_priority;cluster;description;config_template;comments;tags
 {% for d in queryset -%}
-{{ d.id }};{{ d.role or '' }};{{ d.device_type.manufacturer or '' }};{{ d.device_type or '' }};{{ d.status or '' }};{{ d.site or '' }};{{ d.name or '' }};{{ d.tenant or '' }};{{ d.platforma or '' }};{{ d.serial or '' }};{{ d.asset_tag or '' }};{{ d.location or '' }};{{ d.rack or '' }};{{ d.position or '' }};{{ d.face or '' }};{{ d.latitude or '' }};{{ d.longitude or '' }};{{ d.parent or '' }};{{ d.device_bay or '' }};{{ d.airflow or '' }};{{ d.virtual_chassis or '' }};{{ d.vc_position or '' }};{{ d.vc_priority or '' }};{{ d.cluster or '' }};{{ d.description or '' }};{{ d.config_template or '' }};{{ d.comments or '' }};"
+{{ d.id }};{{ d.role or '' }};{{ d.device_type.manufacturer or '' }};{{ d.device_type or '' }};{{ d.status or '' }};{{ d.site or '' }};{{ d.name or '' }};{{ d.tenant or '' }};{{ d.platform or '' }};{{ d.serial or '' }};{{ d.asset_tag or '' }};{{ d.location or '' }};{{ d.rack or '' }};{{ d.position or '' }};{{ d.face or '' }};{{ d.latitude or '' }};{{ d.longitude or '' }};{{ d.parent or '' }};{{ d.device_bay or '' }};{{ d.airflow or '' }};{{ d.virtual_chassis or '' }};{{ d.vc_position or '' }};{{ d.vc_priority or '' }};{{ d.cluster or '' }};{{ d.description or '' }};{{ d.config_template or '' }};{{ d.comments or '' }};"
    {%- for tag in d.tags.slugs() -%}
 {{ tag }}{%- if not loop.last -%},{%- endif -%}
    {%- endfor -%}"
