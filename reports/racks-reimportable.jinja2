@@ -4,9 +4,16 @@ Toni Comerma
 juny 2025
 versio: 0.01
 
+Notes: 
+  - Joc de caracters
+    Exportació: Si es vol poder reimportar a xls sense problemes, escollir MIME type "text/csv; charset=cp1252". 
+                Aquest és el valor suggerit.
+    Importació: Excel sempre exporta en cp1252. Netbox només importa utf-8. Cal passar per un script per fer el canvi
+      Exemple: Des d'un powershell
+          Get-Content win.csv | Set-Content -Encoding utf8 utf8.csv
 Pendent: 
-  - Joc de caràcters
-  - Comentaris multi linia
+
+  - Comentaris multi linia. De reimportació apareixen  com 1 linia
 -#}
 {% set ns = namespace(count=0, level=0, curr=[], index="") -%}
 id;site;name;status;location;facility_id;tenant;role;rack_type;form_factor;serial;asset_tag;width;u_height;desc_units;outer_width;outer_height;outer_depth;outer_unit;mounting_depth;airflow;weight;max_weight;weight_unit;description;comments;tags
