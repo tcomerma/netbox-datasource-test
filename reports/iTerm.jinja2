@@ -1,0 +1,17 @@
+{
+  "Profiles": [
+{% set ns = namespace(count=0, level=0, curr=[], index="") -%}
+{% for d in queryset -%}
+
+    {
+       "Name": "{{ d.name }} ### {{ d.primary_ip.address.ip if d.primary_ip.address}}",
+       "Guid": "netbox_{{ d.id }}",
+       "Custom Command" : "Yes",
+       "Command" : "ssh {{ d.primary_ip.address.ip if d.primary_ip.address }}",
+       "Tags" : [
+          "{{ d.cf["Jerarquia"] }}"
+       ],
+    },
+  {% endfor -%}
+  ]
+}
